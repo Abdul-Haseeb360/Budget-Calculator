@@ -17,10 +17,9 @@ const THIncome: React.FC<THIncomeProps> = ({
     <div>
       <div
         className="bg-[#FFFFFF] lg:ml-8 mr-10 ml-8 mt-4 w-[368px] h-32 rounded-lg 
-            shadow-[hsla(218, 17%, 35%, 0.07)] flex "
-      >
+            shadow-[hsla(218, 17%, 35%, 0.07)] flex ">
         <div>
-          <div className="w-full lg:w-auto h-6 pt-4 pl-6 ms:justify-between">
+          <div className="w-auto h-6 pt-4 pl-6 md:pr-20">
             <h1 className="font-Inter font-medium text-base text-[#838383]">
               {Income}
             </h1>
@@ -38,7 +37,7 @@ const THIncome: React.FC<THIncomeProps> = ({
             </h1>
           </div>
         </div>
-        <div className="h-6 rounded-2xl lg:pl-2 md:pl-12 mt-4 bg-[#ECFFEA] mr-[7px]">
+        <div className="h-6 rounded-2xl lg:pl-2 md:pl-12 mt-4 bg-[#ECFFEA] lg:mr-[7px]">
           <h1 className="text-[#5AB064;] font-Inter pr-2 font-semibold text-[14px] leading-6">
             Income
           </h1>

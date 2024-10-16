@@ -29,7 +29,7 @@ export default function PieChart(props: {
   });
 
   // Prepare data for the income pie chart
-  const incomeData: (string | number)[][] = [["Category", "Income"]];
+  const incomeData: (string | number)[][] = [["Category", "Income"],];
   incomeCategories.forEach((amount, category) => {
     incomeData.push([category, amount]);
   });
@@ -41,8 +41,8 @@ export default function PieChart(props: {
   });
 
   // Debugging: Log the prepared data
-  console.log("Income Data:", incomeData);
-  console.log("Expense Data:", expenseData);
+  // console.log("Income Data:", incomeData);
+  // console.log("Expense Data:", expenseData);
 
   // Define options for the pie charts
   const options = {
@@ -59,25 +59,55 @@ export default function PieChart(props: {
   return (
     <div>
       {/* Income Pie Chart */}
-    
-      <Chart
+      
+      {/* <Chart
         chartType="PieChart"
         data={incomeData}
-        options={{ ...options, backgroundColor: "transparent", pieSliceTextStyle: {
+        options={{ ...options, backgroundColor: "transparent", 
+          sliceVisibilityThreshold: 0,
+          pieSliceTextStyle: {
           fontSize: 8, 
         } }}
         width={"450px"}
         height={"250px"}
-      />
+      /> */}
+
+<Chart
+  chartType="PieChart"
+  data={incomeData}
+  options={{
+    ...options,
+    backgroundColor: "transparent",
+    // This makes the chart a donut
+    sliceVisibilityThreshold: 0, // Ensure all slices are visible
+    pieSliceText: "percentage", // Show percentage inside each slice
+    pieSliceTextStyle: {
+      fontSize: 8, // Adjust font size for better readability
+      color: "#fff", // Text color to contrast with the slice
+    },
+    legend: {
+      position: "right", // Position legend on the right side
+      textStyle: {
+        fontSize: 11,
+        color: "#333", // Customize legend text style
+      },
+    },
+    colors: ["#00bcd4", "#ff9800", "#e91e63", "#9c27b0"], // Distinct colors for slices
+  }}
+  width={"450px"}
+  height={"250px"}
+/>
+
 
       {/* Expense Pie Chart */}
     <h2 className="font-Inter font-bold text-base ml-10">Expense</h2>
       <Chart
         chartType="PieChart"
         data={expenseData}
-        options={{ ...options, backgroundColor: "transparent", pieSliceTextStyle: {
+        options={{ ...options, backgroundColor: "transparent",
+          pieSliceTextStyle: {  
           fontSize: 8, 
-        } }}
+        }}}
         width={"450px"}
         height={"250px"}
       />

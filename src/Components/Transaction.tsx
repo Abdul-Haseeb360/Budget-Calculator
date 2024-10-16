@@ -374,7 +374,6 @@ const Transaction: React.FC<TransactionProps> = ({
         isOpen={isSummaryModalOpen}
         onClose={() => setSummaryModalOpen(false)}
       >
-        <h2 className="font-Inter font-bold text-base ml-10">Income</h2>
         <PieChart transactions={transactions} savings={0} />
       </Modal>
     </div>
