@@ -77,7 +77,7 @@ export default function PieChart(props: {
     },
     colors: ["#00bcd4", "#ff9800", "#e91e63", "#9c27b0"], 
   }}
-  width={"400px"}
+  width={"100%"}
   height={"250px"}
 />
 
