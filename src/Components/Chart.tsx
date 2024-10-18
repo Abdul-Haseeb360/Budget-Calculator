@@ -10,7 +10,7 @@ export default function PieChart(props: {
   }[];
   savings: number;
 }) {
-  // Calculate total income and expenses
+
   const incomeCategories = new Map<string, number>();
   const expenseCategories = new Map<string, number>();
 
@@ -28,23 +28,19 @@ export default function PieChart(props: {
     }
   });
 
-  // Prepare data for the income pie chart
+
   const incomeData: (string | number)[][] = [["Category", "Income"],];
   incomeCategories.forEach((amount, category) => {
     incomeData.push([category, amount]);
   });
 
-  // Prepare data for the expense pie chart
+
   const expenseData: (string | number)[][] = [["Category", "Expense"]];
   expenseCategories.forEach((amount, category) => {
     expenseData.push([category, amount]);
   });
 
-  // Debugging: Log the prepared data
-  // console.log("Income Data:", incomeData);
-  // console.log("Expense Data:", expenseData);
 
-  // Define options for the pie charts
   const options = {
     pieHole: 0.6,
     is3D: false,
@@ -58,19 +54,7 @@ export default function PieChart(props: {
 
   return (
     <div>
-      {/* Income Pie Chart */}
-      
-      {/* <Chart
-        chartType="PieChart"
-        data={incomeData}
-        options={{ ...options, backgroundColor: "transparent", 
-          sliceVisibilityThreshold: 0,
-          pieSliceTextStyle: {
-          fontSize: 8, 
-        } }}
-        width={"450px"}
-        height={"250px"}
-      /> */}
+        <h2 className="font-Inter font-bold text-base ml-10">Income</h2>
 
 <Chart
   chartType="PieChart"
@@ -78,23 +62,22 @@ export default function PieChart(props: {
   options={{
     ...options,
     backgroundColor: "transparent",
-    // This makes the chart a donut
-    sliceVisibilityThreshold: 0, // Ensure all slices are visible
-    pieSliceText: "percentage", // Show percentage inside each slice
+    sliceVisibilityThreshold: 0, 
+    pieSliceText: "percentage", 
     pieSliceTextStyle: {
-      fontSize: 8, // Adjust font size for better readability
-      color: "#fff", // Text color to contrast with the slice
+      fontSize: 8, 
+      color: "#fff", 
     },
     legend: {
-      position: "right", // Position legend on the right side
+      position: "right", 
       textStyle: {
         fontSize: 11,
-        color: "#333", // Customize legend text style
+        color: "#333",
       },
     },
-    colors: ["#00bcd4", "#ff9800", "#e91e63", "#9c27b0"], // Distinct colors for slices
+    colors: ["#00bcd4", "#ff9800", "#e91e63", "#9c27b0"], 
   }}
-  width={"450px"}
+  width={"400px"}
   height={"250px"}
 />
 
@@ -108,7 +91,7 @@ export default function PieChart(props: {
           pieSliceTextStyle: {  
           fontSize: 8, 
         }}}
-        width={"450px"}
+        width={"400px "}
         height={"250px"}
       />
     </div>

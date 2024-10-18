@@ -1,43 +1,52 @@
 interface THExpenseProps {
   amount: number;
   description: string;
-  Expense:string
+  Expense: string;
   onDelete: () => void;
 }
 
-const THExpense: React.FC<THExpenseProps> = ({ amount, description,Expense, onDelete}) => {
+const THExpense: React.FC<THExpenseProps> = ({
+  amount,
+  description,
+  Expense,
+  onDelete,
+}) => {
   return (
     <div>
       <div
-        className="bg-[#FFFFFF] ml-8 mr-10 mt-4 w-[368px] h-32 rounded-lg 
-                 shadow-[hsla(218, 17%, 35%, 0.07)] flex "
+        className="bg-[#FFFFFF] lg:mx-10 mr-4 ml-4 mt-4 w-[368px] h-auto rounded-lg 
+    shadow-[hsla(218, 17%, 35%, 0.07)] flex justify-between p-4"
       >
-        <div>
-          <div className="w-12 h-6 pt-4 pl-6">
-            <h1 className=" font-Inter font-medium text-base text-[#838383;]">
-             {Expense}
+        <div className="flex-1 lg:ml-4 md:ml-0">
+          <div className="w-auto h-6 justify-between">
+            <h1 className="font-Inter font-medium text-base text-[#838383] pb-20">
+              {Expense}
             </h1>
           </div>
-          <div className="w-[83px] h-6 pt-4 pl-6">
-            <h1 className=" font-Inter font-bold text-[32px] leading-6 pt-2">
+
+          <div className="w-full lg:w-[83px] h-6 mb-4">
+            <h1 className="font-Inter font-bold text-[32px] md:text-4xl leading-6">
               ${amount}
             </h1>
           </div>
-          <div className="w-[253px] mt-4 pl-6">
-            <h1 className="font-Inter pt-4 pb-4 font-normal text-[#4F4F4F] text-[14px] leading-6">
-           {description}
+
+          <div className="w-full lg:w-auto mt-4">
+            <h1 className="font-Inter font-normal text-sm md:text-base lg:text-[14px] w-full leading-6 text-[#4F4F4F]">
+              {description}
             </h1>
           </div>
         </div>
-        <div className="h-6 w-[66px] rounded-2xl pl-2 pr-2 mt-4 gap-2.5 bg-[#FFEAEA] mr-2">
-          <h1 className="text-[#B05A5A;] font-Inter font-semibold text-[14px] leading-6">
+
+        <div className="h-6 rounded-2xl bg-[#ECFFEA] lg:mr-[7px] flex items-center  px-2">
+          <h1 className="text-[#5AB064] font-Inter font-semibold text-[14px] md:text-[14px]">
             Expense
           </h1>
         </div>
-        <div className="w-5 h-5 mt-4 mr-6 cursor-pointer" onClick={onDelete}>
+
+        <div className="w-5 h-5 ml-2 cursor-pointer" onClick={onDelete}>
           <img
             src={`${process.env.PUBLIC_URL}../Images/Orion_bin 1.svg`}
-            alt=""
+            alt="Delete Icon"
           />
         </div>
       </div>
@@ -46,8 +55,3 @@ const THExpense: React.FC<THExpenseProps> = ({ amount, description,Expense, onDe
 };
 
 export default THExpense;
-
-
-
-
-
