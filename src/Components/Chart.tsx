@@ -69,7 +69,7 @@ export default function PieChart(props: {
       color: "#fff", 
     },
     legend: {
-      position: "right", 
+      position: "rigt", 
       textStyle: {
         fontSize: 11,
         color: "#333",

@@ -16,14 +16,14 @@ const THIncome: React.FC<THIncomeProps> = ({
   return (
     <div>
       <div className="bg-[#FFFFFF] lg:mx-10 mr-4 ml-8 mt-4 lg:w-[368px] w-[328px] h-auto rounded-lg shadow-[hsla(218, 17%, 35%, 0.07)] flex justify-between p-4">
-        <div className="flex-1 lg:ml-6 ml-[-80px]">
+        <div className="flex-1 lg:ml-6">
           <div className="w-auto h-6 justify-between">
             <h1 className="font-Inter font-medium text-base text-[#838383] pb-20">
               {Income}
             </h1>
           </div>
 
-          <div className="w-full lg:w-[83px] h-6 mb-4 ml-[-10px]">
+          <div className="w-full lg:w-[83px] h-6 mb-4">
             <h1 className="font-Inter font-bold text-[32px] md:text-4xl leading-6">
               ${amount}
             </h1>
