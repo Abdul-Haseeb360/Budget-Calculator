@@ -16,6 +16,19 @@ interface Transaction {
 }
 
 const App: React.FC = () => {
+
+
+  const [showTransaction, setShowTransaction] = useState(false);
+  const [showFinancialSummary, setShowFinancialSummary] = useState(false);
+
+  const toggleTransactionForm = () => {
+    setShowTransaction(!showTransaction);
+  };
+
+  const toggleFinancialSummary = () => {
+    setShowFinancialSummary(!showFinancialSummary);
+  };
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const [transactionType, setTransactionType] = useState<"income" | "expense">("income");
@@ -35,12 +48,16 @@ const App: React.FC = () => {
       <Container>
         <Available availableBalance={availableBalance} />
         <IncomeExpenses totalIncome={totalIncome} totalExpense={totalExpense} />
+     
+        <div className={`md:block ${showTransaction ? "block" : "hidden"}`}>
         <Transaction 
           transactions={transactions} 
           setTransactions={setTransactions} 
           transactionType={transactionType} 
           setTransactionType={setTransactionType} 
         />
+        </div>
+       
       </Container>
     </BudgetContextProvider>
   );

@@ -9,7 +9,7 @@
 
     return(
       <div>
-        <div className=" bg-[#455A64] md:w-[428px] lg:w-[auto]  h-[139px] rounded-lg   mt-10 mb-6 py-1 ">
+        <div className=" bg-[#455A64] font-body h-[139px] rounded-lg   mt-10 mb-6 py-1 ">
           <div className="h-3/4 w-56">
             <h2 className=" font-medium font-Inter text-white text-sm leading-5 left-10 pt-9 pl-9 text-[#FFFFFFB2;] ">
             Avaliable Balance

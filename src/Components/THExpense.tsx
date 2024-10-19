@@ -14,7 +14,7 @@ const THExpense: React.FC<THExpenseProps> = ({
   return (
     <div>
       <div
-        className="bg-[#FFFFFF] lg:mx-10 mr-4 ml-4 mt-4 w-[368px] h-auto rounded-lg 
+        className="bg-[#FFFFFF] mx-8 mt-4  h-auto rounded-lg 
     shadow-[hsla(218, 17%, 35%, 0.07)] flex justify-between p-4"
       >
         <div className="flex-1 lg:ml-4 md:ml-0">
@@ -37,8 +37,8 @@ const THExpense: React.FC<THExpenseProps> = ({
           </div>
         </div>
 
-        <div className="h-6 rounded-2xl bg-[#ECFFEA] lg:mr-[7px] flex items-center  px-2">
-          <h1 className="text-[#5AB064] font-Inter font-semibold text-[14px] md:text-[14px]">
+        <div className="h-6 rounded-2xl bg-[#FFEAEA] lg:mr-[7px] flex items-center  px-2">
+          <h1 className="text-[#B05A5A] font-Inter font-semibold text-[14px] md:text-[14px]">
             Expense
           </h1>
         </div>

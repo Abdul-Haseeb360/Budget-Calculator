@@ -3,7 +3,12 @@ import THIncome from "./THIncome";
 import THExpense from "./THExpense";
 import FinencialS from "./FinencialSummary";
 import PieChart from "./Chart";
+import { useForm } from "react-hook-form";
 // import { useBudget } from "../contexts/context";
+
+
+
+
 
 const Modal: React.FC<{
   isOpen: boolean;
@@ -31,6 +36,13 @@ const Modal: React.FC<{
     </div>
   );
 };
+
+
+interface FormInputs {
+  category: string;
+  amount: number;
+  description: string;
+}
 
 interface Transactions {
   type: "income" | "expense"; // Ensure 'type' is correctly typed
@@ -100,7 +112,7 @@ const Transaction: React.FC<TransactionProps> = ({
   };
 
   return (
-    <div className="flex  md:justify-center lg:justify-between ">
+    <div className="flex  md:justify-center lg:justify-between font-body">
       <div className="lg:hidden w-full h-auto mr-10 mt-6 bg-[#F9F9F9] rounded-lg ml-15 text-center shadow-xl overflow-y-hidden ">
         {transactions.length === 0 ? (
           <p className="p-12 font-semibold">
@@ -136,11 +148,17 @@ const Transaction: React.FC<TransactionProps> = ({
           </div>
         )}
       </div>
-      <div className="flex flex-1">
+
+
+        {/* response message */}
+
+        
+
         {/* Add Transaction */}
+      <div className="flex flex-1">
         <div className="h-[623px] mt-6 mr-10 ">
-          <div className="leading-[42px] w-[211px] h-[42px] mb-10">
-            <h1 className="font-Inter font-semibold">Add Transaction</h1>
+          <div className="leading-[42px]  h-[42px] mb-10">
+            <h1 className="font-Inter font-semibold text-[27px] leading-[42px]">Add Transaction</h1>
           </div>
 
           <div className="mb-4">
@@ -149,7 +167,7 @@ const Transaction: React.FC<TransactionProps> = ({
             </label>
             <div className="flex space-x-2">
               <button
-                className={`md:w-[152px] w-[50%] h-[81px] py-2 font-bold text-base rounded-lg border ${
+                className={`md:w-[152px]  h-[81px] py-2 font-bold text-base rounded-lg border ${
                   transactionType === "income"
                     ? "bg-[#D9E7E5] border-[#42887C]"
                     : "bg-[#D9E7E5] border-transparent"
@@ -200,7 +218,7 @@ const Transaction: React.FC<TransactionProps> = ({
             </label>
             <input
               id="amount"
-              type="text"
+              type="number"
               placeholder="$$$"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
@@ -234,8 +252,8 @@ const Transaction: React.FC<TransactionProps> = ({
         {/* Transaction History */}
         <div className=" flex-1  ">
           <div className="bg-white lg:bg-[#F9F9F9] mt-6 mb-10 mr-6  h-[623px] overflow-y-auto rounded-lg ">
-            <div className="w-[252px] h-[42px] mt-10 ml-10">
-              <h1 className="font-Inter font-semibold text-[27px] leading-[42px]">
+            <div className=" h-[42px] mt-10 ml-10">
+              <h1 className="font-body font-semibold text-[27px] leading-[42px]">
                 Transaction History
               </h1>
             </div>

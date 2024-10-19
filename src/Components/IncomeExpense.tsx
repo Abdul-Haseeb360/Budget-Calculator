@@ -10,7 +10,7 @@ const IncomeExpense: React.FC<IncomeExpenseSummaryProps> = ({ totalIncome, total
 
 return(
  <div>
-  <div className="flex flex-1">
+  <div className="flex flex-1 font-body">
 
   
     <div className="bg-[#D9E7E5] h-[139px] rounded-lg mr-6 flex-1 flex">

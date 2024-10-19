@@ -15,7 +15,7 @@ const THIncome: React.FC<THIncomeProps> = ({
 }) => {
   return (
     <div>
-      <div className="bg-[#FFFFFF]  mx-8 mt-4  h-auto rounded-lg shadow-[hsla(218, 17%, 35%, 0.07)] flex justify-between p-4">
+      <div className="bg-[#FFFFFF]  mx-8 shadow mt-4  h-auto rounded-lg shadow-[hsla(218, 17%, 35%, 0.07)] flex justify-between p-4">
         <div className="flex-1 lg:ml-6">
           <div className="w-auto h-6 justify-between">
             <h1 className="font-Inter font-medium text-base text-[#838383] pb-20">
