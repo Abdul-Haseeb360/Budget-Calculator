@@ -4,11 +4,6 @@ import THExpense from "./THExpense";
 import FinencialS from "./FinencialSummary";
 import PieChart from "./Chart";
 import { useForm } from "react-hook-form";
-// import { useBudget } from "../contexts/context";
-
-
-
-
 
 const Modal: React.FC<{
   isOpen: boolean;
@@ -37,15 +32,8 @@ const Modal: React.FC<{
   );
 };
 
-
-interface FormInputs {
-  category: string;
-  amount: number;
-  description: string;
-}
-
 interface Transactions {
-  type: "income" | "expense"; // Ensure 'type' is correctly typed
+  type: "income" | "expense";
   amount: number;
   description: string;
   category: string;
@@ -53,19 +41,29 @@ interface Transactions {
 }
 
 interface TransactionProps {
-  transactions: Transactions[]; // Use Transactions array here
+  transactions: Transactions[];
   setTransactions: Dispatch<SetStateAction<Transactions[]>>;
   transactionType: "income" | "expense";
   setTransactionType: Dispatch<SetStateAction<"income" | "expense">>;
 }
 
+interface FormInputs {
+  category: string;
+  amount: number;
+  description: string;
+}
 const Transaction: React.FC<TransactionProps> = ({
   transactions,
   setTransactions,
   transactionType,
   setTransactionType,
 }) => {
-  console.log(transactions, "transactions");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormInputs>();
 
   const incomeCategories = ["Salary", "Rental Income", "Business", "Stocks"];
   const expenseCategories = ["Shopping", "Food", "Entertainment", "Grocery"];
@@ -76,10 +74,7 @@ const Transaction: React.FC<TransactionProps> = ({
   const [isTransactionModalOpen, setTransactionModalOpen] = useState(false);
   const [isSummaryModalOpen, setSummaryModalOpen] = useState(false);
 
-  const handleAddTransaction = () => {
-    const category = (document.getElementById("category") as HTMLSelectElement)
-      .value;
-
+  const onSubmit = (data: FormInputs) => {
     const id = transactions.length
       ? transactions[transactions.length - 1].id + 1
       : 1;
@@ -89,12 +84,13 @@ const Transaction: React.FC<TransactionProps> = ({
       {
         id,
         type: transactionType,
-        amount: parseFloat(amount),
-        description,
-        category,
+        amount: parseFloat(data.amount.toString()),
+        description: data.description,
+        category: data.category,
       },
     ]);
 
+    reset();
     setAmount("");
     setDescription("");
   };
@@ -109,6 +105,7 @@ const Transaction: React.FC<TransactionProps> = ({
     setTransactionType(type);
     setAmount("");
     setDescription("");
+    reset();
   };
 
   return (
@@ -149,105 +146,131 @@ const Transaction: React.FC<TransactionProps> = ({
         )}
       </div>
 
+      {/* response message */}
 
-        {/* response message */}
+      {/* Add Transaction */}
 
-        
-
-        {/* Add Transaction */}
       <div className="flex flex-1">
-        <div className="h-[623px] mt-6 mr-10 ">
-          <div className="leading-[42px]  h-[42px] mb-10">
-            <h1 className="font-Inter font-semibold text-[27px] leading-[42px]">Add Transaction</h1>
-          </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="h-[623px] mt-6 mr-10 ">
+            <div className="leading-[42px]  h-[42px] mb-10">
+              <h1 className="font-Inter font-semibold text-[27px] leading-[42px]">
+                Add Transaction
+              </h1>
+            </div>
 
-          <div className="mb-4">
-            <label className="block font-Inter font-normal text-base text-[#030303] mb-2">
-              Select Type
-            </label>
-            <div className="flex space-x-2">
-              <button
-                className={`md:w-[152px]  h-[81px] py-2 font-bold text-base rounded-lg border ${
-                  transactionType === "income"
-                    ? "bg-[#D9E7E5] border-[#42887C]"
-                    : "bg-[#D9E7E5] border-transparent"
-                }`}
-                onClick={() => handleTransactionTypeChange("income")}
+            <div className="mb-4">
+              <label className="block font-Inter font-normal text-base text-[#030303] mb-2">
+                Select Type
+              </label>
+              <div className="flex space-x-2">
+                <button
+                  className={`md:w-[152px]  h-[81px] py-2 font-bold text-base rounded-lg border ${
+                    transactionType === "income"
+                      ? "bg-[#D9E7E5] border-[#42887C]"
+                      : "bg-[#D9E7E5] border-transparent"
+                  }`}
+                  onClick={() => handleTransactionTypeChange("income")}
+                >
+                  Income
+                </button>
+                <button
+                  className={`md:w-[152px] w-[50%] h-[81px] font-Inter font-normal text-base text-[#767676;] py-2 rounded-md border ${
+                    transactionType === "expense"
+                      ? "bg-[#EBEBEB] border-[#42887C]"
+                      : "bg-[#EBEBEB] border-transparent"
+                  }`}
+                  onClick={() => handleTransactionTypeChange("expense")}
+                >
+                  Expense
+                </button>
+              </div>
+            </div>
+
+            <div className="w-[71px] h-6">
+              <h1 className="font-normal font-Inter text-base mt-2">
+                Category
+              </h1>
+            </div>
+            <div className="mt-2 rounded-[rgba(208, 213, 221, 1)] shadow-[rgba(16, 24, 40, 0.05)]">
+              <select
+                id="category"
+                {...register("category", { required: "Category is required" })}
+                className="pt-2.5 pb-2.5 pl-3.5 pr-3.5 rounded-lg w-full lg:w-80 h-11 gap-2 font-normal font-Inter text-base border-2"
               >
-                Income
-              </button>
-              <button
-                className={`md:w-[152px] w-[50%] h-[81px] font-Inter font-normal text-base text-[#767676;] py-2 rounded-md border ${
-                  transactionType === "expense"
-                    ? "bg-[#EBEBEB] border-[#42887C]"
-                    : "bg-[#EBEBEB] border-transparent"
-                }`}
-                onClick={() => handleTransactionTypeChange("expense")}
+                <option>Select Category</option>
+                {transactionType === "income"
+                  ? incomeCategories.map((category, index) => (
+                      <option key={index} value={category}>
+                        {category}
+                      </option>
+                    ))
+                  : expenseCategories.map((category, index) => (
+                      <option key={index} value={category}>
+                        {category}
+                      </option>
+                    ))}
+              </select>
+              {errors.category && <p>{errors.category.message}</p>}
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-Inter font-normal text-base mt-4 mb-2">
+                Amount
+              </label>
+              <input
+                id="amount"
+                type="number"
+                placeholder="$$$"
+                value={amount}
+                step="0.01"
+                {...register("amount", {
+                  required: "Amount is required",
+                  min: { value: 1, message: "Amount must be greater than 0" },
+                })}
+                onChange={(e) => setAmount(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-500"
+              />
+              {errors.amount && (
+                <p className="text-red-500 mt-1 text-sm">
+                  {errors.amount.message}
+                </p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-Inter font-normal text-base mt-4 mb-2">
+                Description
+              </label>
+              <textarea
+                id="description"
+                placeholder="Enter a description..."
+                value={description}
+                {...register("description", {
+                  required: "Description is required",
+                  maxLength: { value: 200, message: "Description too long" },
+                })}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 rows=4 h-[128px]"
               >
-                Expense
+                {errors.description && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    {errors.description.message}
+                  </p>
+                )}
+              </textarea>
+            </div>
+
+            <div className="bg-[#FFC727] text-center w-full lg:w-80 h-11 mt-6 rounded-lg">
+              <button
+                className="pt-2.5 pb-3.5 pl-24 pr-24 font-semibold text-[#FFFFFF]"
+                type="submit"
+              >
+                Add Transaction
               </button>
             </div>
           </div>
-
-          <div className="w-[71px] h-6">
-            <h1 className="font-normal font-Inter text-base mt-2">Category</h1>
-          </div>
-          <div className="mt-2 rounded-[rgba(208, 213, 221, 1)] shadow-[rgba(16, 24, 40, 0.05)]">
-            <select
-              id="category"
-              className="pt-2.5 pb-2.5 pl-3.5 pr-3.5 rounded-lg w-full lg:w-80 h-11 gap-2 font-normal font-Inter text-base border-2"
-            >
-              <option>Select Category</option>
-              {transactionType === "income"
-                ? incomeCategories.map((category, index) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  ))
-                : expenseCategories.map((category, index) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  ))}
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block font-Inter font-normal text-base mt-4 mb-2">
-              Amount
-            </label>
-            <input
-              id="amount"
-              type="number"
-              placeholder="$$$"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-Inter font-normal text-base mt-4 mb-2">
-              Description
-            </label>
-            <textarea
-              id="description"
-              placeholder="Enter a description..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full border border-gray-300 rounded-md p-2 rows=4 h-[128px]"
-            ></textarea>
-          </div>
-
-          <div className="bg-[#FFC727] text-center w-full lg:w-80 h-11 mt-6 rounded-lg">
-            <button
-              className="pt-2.5 pb-3.5 pl-24 pr-24 font-semibold text-[#FFFFFF]"
-              onClick={handleAddTransaction}
-            >
-              Add Transaction
-            </button>
-          </div>
-        </div>
+        </form>
 
         {/* Transaction History */}
         <div className=" flex-1  ">
@@ -383,7 +406,7 @@ const Transaction: React.FC<TransactionProps> = ({
             <div className="bg-[#FFC727] text-center w-full h-11 mt-6 rounded-lg">
               <button
                 className="pt-2.5 pb-3.5 pl-24 pr-24 font-semibold text-white"
-                onClick={handleAddTransaction}
+                type="submit"
               >
                 Add Transaction
               </button>
@@ -391,7 +414,7 @@ const Transaction: React.FC<TransactionProps> = ({
           </div>
         </Modal>
       </div>
-      {/* Financial Summary Modal */}
+
       <Modal
         isOpen={isSummaryModalOpen}
         onClose={() => setSummaryModalOpen(false)}
