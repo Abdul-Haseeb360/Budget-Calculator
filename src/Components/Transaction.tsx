@@ -110,45 +110,6 @@ const Transaction: React.FC<TransactionProps> = ({
 
   return (
     <div className="flex  md:justify-center lg:justify-between font-body">
-      <div className="lg:hidden w-full h-auto mr-10 mt-6 bg-[#F9F9F9] rounded-lg ml-15 text-center shadow-xl overflow-y-hidden ">
-        {transactions.length === 0 ? (
-          <p className="p-12 font-semibold">
-            There is no transaction History, please add Transaction
-          </p>
-        ) : (
-          <div className="bg-[#F9F9F9] mt-6 mb-10 sm:pl-0 h-[623px] overflow-y-hi rounded-lg ">
-            <div className="sm:w-auto h-[42px] mt-10 ml-10">
-              <h1 className="font-Inter font-semibold text-[27px] leading-[42px]">
-                Transaction History
-              </h1>
-            </div>
-
-            {transactions.map((t, index) =>
-              t.type === "income" ? (
-                <THIncome
-                  key={index}
-                  amount={t.amount}
-                  description={t.description}
-                  Income={t.category}
-                  onDelete={() => deleteTransaction(t.id)}
-                />
-              ) : (
-                <THExpense
-                  key={index}
-                  amount={t.amount}
-                  description={t.description}
-                  Expense={t.category}
-                  onDelete={() => deleteTransaction(t.id)}
-                />
-              )
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* response message */}
-
-      {/* Add Transaction */}
 
       <div className="flex flex-1">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -304,24 +265,6 @@ const Transaction: React.FC<TransactionProps> = ({
         </div>
       </div>
 
-      {/* Responsive Buttons with Modal functionality */}
-
-      <div className="">
-        <div className="lg:hidden flex sm:block mt-6 ml-0 overflow-x-hidden">
-          <button
-            className="bg-[#FFC727] w-[160px] h-auto text-white  pt-2.5 pb-2.5 pl-4 pr-4 rounded-lg font-semibold mr-2  text-base"
-            onClick={() => setTransactionModalOpen(true)}
-          >
-            Add Transaction
-          </button>
-          <button
-            className="bg-[#FFC727] text-white p-3 rounded-lg pt-2.5 pb-2.5 pl-4 pr-4 font-semibold w-[auto] h-auto"
-            onClick={() => setSummaryModalOpen(true)}
-          >
-            Financial Summary
-          </button>
-        </div>
-      </div>
       <FinencialS
         transactions={transactions}
         transactionType={transactionType}
